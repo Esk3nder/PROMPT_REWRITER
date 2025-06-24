@@ -62,3 +62,8 @@
 ## AFTER_JSON
 CRITIQUE: Review the draft for correctness, clarity, brevity. List any issues.  
 PATCH: Fix **all** listed issues, then stop.
+
+## Notes
+Remove the entire FEW_SHOT block if you have no examples.
+If ROLE_CONTEXT is unnecessary, omit the key entirely.
+SUBTASKS starts as an empty array; the model must fill it.
