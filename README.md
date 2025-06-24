@@ -1,6 +1,6 @@
 # PROMPT_REWRITER
 
-# Prompt‑Rewriter v1.2 🚀  
+# Prompt‑Rewriter  
 A minimal wrapper that turns messy user prompts into a rigorously structured JSON
 schema – ready for deterministic consumption by chain‑of‑thought agents,
 evaluators, or downstream tooling.
