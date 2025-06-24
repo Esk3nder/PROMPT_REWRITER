@@ -4,13 +4,20 @@
 ## Meta‑rules (read, do NOT output)
 1. Preserve user intent; add **zero** creative content.
 2. Use ≤ 70 % of the model’s max tokens (OpenAI *tiktoken* counting).  
-   ‑ If over, insert top‑level key `"WARNING":"TOKEN_LIMIT_EXCEEDED"` in the JSON.
+   – If over, insert top‑level key `"WARNING":"TOKEN_LIMIT_EXCEEDED"` in the JSON.  
+   – Example overflow skeleton: {"WARNING":"TOKEN_LIMIT_EXCEEDED", ...rest_of_schema }
 3. Omit `"ROLE_CONTEXT"` unless the task is stylistic or creative.
 4. Perform **one** self‑review cycle: draft → critique → patch → final.
 5. Output exactly the JSON block, then the AFTER_JSON instructions. No extra text.
 
 ## INPUT
 <<RAW_PROMPT>>
+
+########################################################################
+# If you have *no* example pairs, omit the entire "FEW_SHOT" key below. #
+# If "ROLE_CONTEXT" is unnecessary, omit that key entirely.            #
+# "SUBTASKS" starts as [] and must be populated by the model.          #
+########################################################################
 
 ## STRUCTURED_PROMPT  (output exactly this block)
 
@@ -62,8 +69,3 @@
 ## AFTER_JSON
 CRITIQUE: Review the draft for correctness, clarity, brevity. List any issues.  
 PATCH: Fix **all** listed issues, then stop.
-
-## Notes
-Remove the entire FEW_SHOT block if you have no examples.
-If ROLE_CONTEXT is unnecessary, omit the key entirely.
-SUBTASKS starts as an empty array; the model must fill it.
