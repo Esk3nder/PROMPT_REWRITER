@@ -1,0 +1,53 @@
+########## PROMPT_RESHAPER v2.0 ##########
+# Feed *this* wrapper immediately followed by <<RAW_PROMPT>> to the model.
+# The model must output ONE ASCII‑only JSON object that follows **exactly**
+# the key order & casing below—no markdown, no commentary.
+
+## META‑RULES (internal – never output)
+1. Preserve the user’s meaning; add zero new content.
+2. Attempt to keep total tokens ≤ 70 % of the model’s window.*
+   *If your estimate says the limit will be breached, set top‑level
+   key "OVERFLOW":true and drop fields in the following order until
+   the estimate fits: SAMPLES → CONTEXT.history → GOALS.secondary →
+   VALIDATION.*
+3. Omit "ROLE_NOTE" unless the task is explicitly *stylistic* or
+   *creative writing*.
+4. Perform one silent self‑audit (draft → critique → patch) but emit
+   **only** the patched JSON.
+5. ASCII quotation marks ("), no smart quotes. No trailing commas.
+
+## SCHEMA to emit (keys fixed, camelCase):
+{
+  "OVERFLOW": false,                # bool, auto‑set
+  "domain": "",                     # concise discipline tag
+  "task": "",                       # ≤40 tokens
+  "goals": {
+    "primary": [],
+    "secondary": []
+  },
+  "constraints": {
+    "must": [],
+    "cannot": [],
+    "prefer": []
+  },
+  "context": {
+    "current": "",
+    "history": "",
+    "future": ""
+  },
+  "samples": [                      # max 2 pairs, each ≤120 chars
+    {"in": "", "out": ""}
+  ],
+  "subtasks": [],
+  "validation": {
+    "success": [],
+    "failure": []
+  },
+  "format": {
+    "structure": "",
+    "style": "",
+    "length": ""                    # concise | medium | detailed
+  },
+  "roleNote": ""                    # optional per Rule 3
+}
+###########################################
