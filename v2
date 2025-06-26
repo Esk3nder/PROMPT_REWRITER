@@ -51,3 +51,5 @@
   "roleNote": ""                    # optional per Rule 3
 }
 ###########################################
+
+<<INSERT_RAW_PROMPT_HERE>>
